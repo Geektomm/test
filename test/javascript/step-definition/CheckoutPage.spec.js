@@ -18,8 +18,14 @@ When(/^User enters already used email$/,()=>{
     checkoutobject.fillEmailFieldWithAlreadyUsedEmail();
 });
 
-Then(/^message about existing Email appears$/,()=>{
+When(/^User enter not valid email$/,()=>{
+    checkoutobject.fillEmailFieldNotValidEmail();
+});
+
+Then(/^message about existing email appears$/,()=>{
     checkoutobject.verifyEmailAlreadyUsedMessage();
-})
+});
 
-
+Then(/^message about not valid email appears$/,()=>{
+    checkoutobject.verifyNotValidEmailMessage();
+});

@@ -14,24 +14,40 @@ class CheckoutPage extends Page {
     get buttonRegister() { return $('#button-register')};
     get emailFieldRegistrationForm() { return $('#payment-address > div.checkout-content > div.left > input:nth-child(14)')};
     get errorEmailAlreadyUsedMessage() { return $('#payment-address > div.checkout-content > div.warning')};
-
+    get emailNotValidMessage() { return $('#payment-address > div.checkout-content > div.left > span.error')}; 
 
     
     /** 
      * Method to click First Button Continue 
      * */
-    clickContinueButtonOnFirstStep() {
+    clickContinueButtonOnFirstStep() 
+    {
         utilObj.waitForDefaultTimeOut();
         this.firstButtonContinue.click();
     }
 
-    fillEmailFieldWithAlreadyUsedEmail() {
+    fillEmailFieldWithAlreadyUsedEmail() 
+    {
         utilObj.waitForDefaultTimeOut();
         this.emailFieldRegistrationForm.click();
         this.emailFieldRegistrationForm.clearValue();
         this.emailFieldRegistrationForm.setValue('maksim@sbe.ee');
         utilObj.waitForDefaultTimeOut();
         this.buttonRegister.click();
+    };
+
+    /*
+    Method to fill email field with not valid email (maksimgmail.com)
+    */
+
+    fillEmailFieldNotValidEmail() {
+        utilObj.waitForDefaultTimeOut();
+        this.emailFieldRegistrationForm.click();
+        this.emailFieldRegistrationForm.clearValue();
+        this.emailFieldRegistrationForm.setValue('maksimgmail.com');
+        utilObj.waitForDefaultTimeOut();
+        this.buttonRegister.click();
+        browser.pause(5000);
     }
 
     /* Method to verify email already used */
@@ -156,7 +172,28 @@ class CheckoutPage extends Page {
            //allure.addDescription("open the server instance");
         }
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    verifyNotValidEmailMessage() {
+        if (this.emailNotValidMessage.isDisplayed()==true)
+        {
+            utilObj.waitForDefaultTimeOut();
+        }
+        else
+        {
+            throw error
+        }
+    }
 }
+
+
 //module.exports = new HomePage();
 module.exports = new CheckoutPage();
